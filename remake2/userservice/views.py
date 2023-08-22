@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -42,3 +42,7 @@ class LoginView(APIView):
                 return Response({'message': '用户名或密码错误'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@csrf_protect
+def logout_view(request):
+    logout(request)
+    return JsonResponse({'message': 'Logged out successfully'})

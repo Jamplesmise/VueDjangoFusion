@@ -12,6 +12,8 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import router from "@/router";
+
 
 // 获取CSRF令牌的函数
 function getCsrfToken() {
@@ -49,7 +51,8 @@ const login = async () => {
 
     console.log('登录成功:', response.data);
     // 在这里添加登录成功后的逻辑，例如重定向到主页面
-
+    window.localStorage.setItem('isAuthenticated', 'true'); // 保存登录状态
+    router.push('/');
   } catch (error) {
     console.error('登录失败:', error);
     if (error.response) {

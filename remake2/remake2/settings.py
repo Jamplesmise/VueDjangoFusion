@@ -46,7 +46,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",# 登出403注释掉
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -64,14 +64,21 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+
 ]
 
 
 ROOT_URLCONF = "remake2.urls"
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000'
+]
 CORS_ALLOWED_ORIGINS = [
     'http://192.168.1.72:8080',  # Vue.js前端可能运行的端口
+    # 'http://localhost:8080'
+
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+CSRF_COOKIE_HTTPONLY = False
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -147,3 +154,4 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
