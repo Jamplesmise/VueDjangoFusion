@@ -26,5 +26,6 @@ def welcome(request):
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/userservice/', include('userservice.urls')),
+    path('api/task_service/', include('task_service.urls')),
     path('', RedirectView.as_view(url='http://localhost:8080/')), # 这里定义根URL的重定向
 ]
